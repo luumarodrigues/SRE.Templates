@@ -2,8 +2,12 @@ name: build-dotnet
 
 on:
   workflow_call:
-  push:
-    branches: [ master ]
+    inputs:
+      buildConfiguration:
+        required: true
+        type: string
+   #secrets:
+   
 
 jobs:
   build:
