@@ -6,7 +6,6 @@ on:
       environment:
         required: true
         type: string
-    env:
       app-name:
         required: true
         type: string
