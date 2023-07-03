@@ -6,9 +6,6 @@ on:
       environment:
         required: true
         type: string
-      app-name:
-        required: true
-        type: string
     secrets:
       publish-profile:
         required: true
@@ -21,6 +18,7 @@ jobs:
       steps:
       - run: echo "teste ${{ inputs.environment }}"
       - run: echo "teste ${{ vars.AZURE_WEBAPP_NAME }}"
+      - run: echo "teste ${{ secrets.publish-profile }}"
       - name: Download a Build Artifact
         uses: actions/download-artifact@v2.1.1
         with:
