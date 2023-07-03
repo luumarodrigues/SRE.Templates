@@ -1,0 +1,30 @@
+name: deploy-webapp
+
+on:
+  workflow_call:
+    inputs:
+      env:
+        required: true
+        type: string
+    secrets:
+      token:
+        required: true
+
+deploy:
+    needs: build
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.evironment }}
+    steps:
+    - name: Download a Build Artifact
+      uses: actions/download-artifact@v2.1.1
+      with:
+        name: webapp
+        path: output
+        
+    - name: 'Run Azure webapp deploy'
+      uses: azure/webapps-deploy@v2
+      with: 
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: './output'
