@@ -3,18 +3,22 @@ name: deploy-webapp
 on:
   workflow_call:
     inputs:
-      env:
+      environment:
+        required: true
+        type: string
+    env:
+      app-name:
         required: true
         type: string
     secrets:
-      token:
+      publish-profile:
         required: true
 
 deploy:
     needs: build
     name: Deploy
     runs-on: ubuntu-latest
-    environment: ${{ inputs.evironment }}
+    environment: ${{ inputs.environment }}
     steps:
     - name: Download a Build Artifact
       uses: actions/download-artifact@v2.1.1
