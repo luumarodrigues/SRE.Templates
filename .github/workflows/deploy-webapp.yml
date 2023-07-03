@@ -6,11 +6,10 @@ on:
       environment:
         required: true
         type: string
-      app-name:
-        required: true
-        type: string
     secrets:
       publish-profile:
+        required: true
+      app-name:
         required: true
         
 jobs:
