@@ -12,22 +12,22 @@ on:
     secrets:
       publish-profile:
         required: true
-
-deploy:
-    needs: build
-    name: Deploy
-    runs-on: ubuntu-latest
-    environment: ${{ inputs.environment }}
-    steps:
-    - name: Download a Build Artifact
-      uses: actions/download-artifact@v2.1.1
-      with:
-        name: webapp
-        path: output
         
-    - name: 'Run Azure webapp deploy'
-      uses: azure/webapps-deploy@v2
-      with: 
-        app-name: ${{ env.app-name }}
-        publish-profile: ${{ secrets.publish-profile }}
-        package: './output'
+jobs:
+  deploy:
+      name: Deploy
+      runs-on: ubuntu-latest
+      environment: ${{ inputs.environment }}
+      steps:
+      - name: Download a Build Artifact
+        uses: actions/download-artifact@v2.1.1
+        with:
+          name: webapp
+          path: output
+
+      - name: 'Run Azure webapp deploy'
+        uses: azure/webapps-deploy@v2
+        with: 
+          app-name: ${{ env.app-name }}
+          publish-profile: ${{ secrets.publish-profile }}
+          package: './output'
