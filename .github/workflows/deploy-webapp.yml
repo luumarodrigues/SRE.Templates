@@ -6,7 +6,9 @@ on:
       environment:
         required: true
         type: string
-        
+    secrets:
+      publish-profile:
+        required: true
 jobs:
   deploy:
       name: Deploy
@@ -23,5 +25,5 @@ jobs:
         uses: azure/webapps-deploy@v2
         with: 
           app-name: ${{ vars.AZURE_WEBAPP_NAME }}
-          publish-profile: ${{ vars.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          publish-profile: ${{ secrets.publish-profile }}
           package: './output'
