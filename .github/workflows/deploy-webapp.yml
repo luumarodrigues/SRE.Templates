@@ -6,9 +6,7 @@ on:
       environment:
         required: true
         type: string
-#    secrets:
-#      publish-profile:
-#        required: true
+
 jobs:
   deploy:
       name: Deploy
