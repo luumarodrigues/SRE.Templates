@@ -6,6 +6,9 @@ on:
       buildConfiguration:
         required: true
         type: string
+      dotnet-version:
+        required: true
+        type: string
 
 #permissions:
 #  actions: read
@@ -19,12 +22,14 @@ jobs:
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v3.2.0
+      with:
+        dotnet-version: ${{ inputs.dotnet-version }}
 
     - name: Install dependencies
       run: dotnet restore
 
     - name: Build 
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build --configuration ${{ inputs.buildConfiguration }} --no-restore
 
     - name: dotnet publish
       run: dotnet publish -c Release -o ./output
